@@ -10,8 +10,17 @@ add_action( 'init', 'remove_redirects' );
 
 // Load scripts
 function load_vue_scripts() {
+
 	wp_enqueue_script(
-		'vuejs-wordpress-theme-starter-js',
+		'cmooc-header-js',
+		get_stylesheet_directory_uri() . '/dist/header.js',
+		array( 'jquery' ),
+		filemtime( get_stylesheet_directory() . '/dist/header.js' ),
+		true
+	);
+
+	wp_enqueue_script(
+		'cmooc-content-js',
 		get_stylesheet_directory_uri() . '/dist/content.js',
 		array( 'jquery' ),
 		filemtime( get_stylesheet_directory() . '/dist/content.js' ),
@@ -19,8 +28,8 @@ function load_vue_scripts() {
 	);
 
 	wp_enqueue_style(
-		'vuejs-wordpress-theme-starter-css',
-		get_stylesheet_directory_uri() . '/dist/styles.css',
+		'cmooc-css',
+		get_stylesheet_directory_uri() . '/dist/style.css',
 		null,
 		filemtime( get_stylesheet_directory() . '/dist/style.css' )
 	);

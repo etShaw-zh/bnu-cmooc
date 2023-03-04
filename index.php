@@ -1,5 +1,9 @@
 <?php get_header(); ?>
 
-<div id="app"></div>
+<div id="primary-home" class="content-area">
+    <main id="app"></main>
+</div>
 
-<?php get_footer();
+<?php
+get_sidebar();
+get_footer();

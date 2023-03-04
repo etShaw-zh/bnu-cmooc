@@ -1,7 +1,5 @@
-<?php status_header(200); ?>
 <!DOCTYPE html>
-<html <?php language_attributes(); ?> class="no-js no-svg">
-
+<html>
   <head>
     <meta
       charset="<?php bloginfo('charset'); ?>">
@@ -11,4 +9,7 @@
   </head>
 
   <body <?php body_class(); ?>>
-    <?php wp_body_open(); ?>
+
+  <div id="page" class="site">
+	<header id="masthead" class="site-header">
+	</header><!-- #masthead -->

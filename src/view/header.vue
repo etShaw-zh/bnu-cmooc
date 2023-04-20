@@ -1,7 +1,7 @@
 <template>
     <el-row>
         <el-col :span="20">
-            <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal">
+            <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
                 <el-menu-item index="1">Processing Center</el-menu-item>
                 <el-sub-menu index="2">
                     <template #title>Workspace</template>
@@ -38,6 +38,7 @@ export default {
         // const language = ref('en')
         const locale = computed(() => (language.value === 'zh-cn' ? zhCn : en))
         const activeIndex = ref('1')
+
         return {
             language,
             locale,
@@ -46,7 +47,7 @@ export default {
     },
 
     methods: {
-        close(key, keyPath) {
+        handleSelect(key, keyPath) {
             console.log(key, keyPath)
         },
         toggle() {

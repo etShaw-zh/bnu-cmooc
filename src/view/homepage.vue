@@ -12,75 +12,116 @@
         </div>
         <div v-if="myThemes.length > 0">
             <!-- <el-divider content-position="left">我关注的主题</el-divider> -->
-            <el-alert style="margin-bottom: 20px; margin-top: 20px;" title="我关注的主题" type="success" effect="dark"
-                :closable="false" description="下方展示你关注的主题~" />
-            <div style="padding-left: 40px;">
-                <el-space direction="horizontal" alignment="start" :size="size">
-                    <el-space wrap :size="size">
-                        <el-card v-for="(item, index) in myThemes" :key="index" class="box-card" style="width: 360px">
-                            <template #header>
-                                <div class="card-header">
-                                    <el-link :href="item.guid" target="_blank" type="primary">{{ item.title }}</el-link>
-                                </div>
-                            </template>
-                            <div class="text item">
-                                <div
-                                    style="color: gray;  display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden;">
-                                    {{ item.content }}</div>
+            <el-alert style="margin-bottom: 20px; margin-top: 20px; background-color: rgb(23, 124, 176) !important;"
+                title="我关注的主题" type="success" effect="dark" :closable="false" description="下方展示你关注的主题~" />
+            <div>
+                <el-skeleton style="width: 100%" :loading="loading" animated :count="3">
+                    <template #template>
+                        <div style="padding: 14px">
+                            <el-skeleton-item variant="h3" style="width: 100%" />
+                            <div style="
+                        display: flex;
+                        align-items: center;
+                        justify-items: space-between;
+                        margin-top: 16px;
+                        height: 16px;
+                        ">
+                                <el-skeleton-item variant="text" style="margin-right: 16px" />
+                                <el-skeleton-item variant="text" style="width: 80%" />
                             </div>
-                            <el-row :gutter="20">
-                                <el-col :span="24">
-                                    <div style="color:gray; margin-top: 30px;">
-                                        <el-icon>
-                                            <StarFilled />
-                                        </el-icon>
-                                        <span style="font-size: small; margin-left: 5px; margin-bottom: 2px;">{{
-                                            item.follows }}
-                                            人关注</span>
+                        </div>
+                    </template>
+                    <template #default>
+                        <el-space direction="horizontal" alignment="start" :size="size">
+                            <el-space wrap :size="size">
+                                <el-card v-for="(item, index) in myThemes" :key="index" class="box-card"
+                                    style="width: 360px">
+                                    <template #header>
+                                        <div class="card-header">
+                                            <el-link :href="item.guid" target="_blank" type="primary">{{ item.title
+                                            }}</el-link>
+                                        </div>
+                                    </template>
+                                    <div class="text item">
+                                        <div
+                                            style="color: gray;  display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden;">
+                                            {{ item.content }}</div>
                                     </div>
-                                </el-col>
-                            </el-row>
-                        </el-card>
-                    </el-space>
-                </el-space>
+                                    <el-row :gutter="20">
+                                        <el-col :span="24">
+                                            <div style="color:gray; margin-top: 30px;">
+                                                <el-icon>
+                                                    <StarFilled />
+                                                </el-icon>
+                                                <span style="font-size: small; margin-left: 5px; margin-bottom: 2px;">{{
+                                                    item.follows }}
+                                                    人关注</span>
+                                            </div>
+                                        </el-col>
+                                    </el-row>
+                                </el-card>
+                            </el-space>
+                        </el-space>
+                    </template>
+                </el-skeleton>
+
             </div>
         </div>
 
         <!-- <el-divider class="margin-top-10" content-position="left">所有主题</el-divider> -->
-        <el-alert style="margin-bottom: 20px; margin-top: 20px;" title="所有主题" type="success" effect="dark" :closable="false"
-            description="下方展示本期课程所有主题~" />
+        <el-alert style="margin-bottom: 20px; margin-top: 20px; background-color: rgb(23, 124, 176) !important;"
+            title="所有主题" type="success" effect="dark" :closable="false" description="下方展示本期课程所有主题~" />
         <!-- vertical -->
-        <div style="padding-left: 40px;">
-            <el-space direction="horizontal" alignment="start" :size="size">
-                <el-space wrap :size="size">
-                    <el-card v-for="(item, index) in themes" :key="index" class="box-card" style="width: 360px">
-                        <template #header>
-                            <div class="card-header">
-                                <el-link :href="item.guid" target="_blank" type="primary">{{ item.title }}</el-link>
-                            </div>
-                        </template>
-                        <div class="text item">
-                            <div
-                                style="color: gray; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden;">
-                                {{ item.content }}</div>
+        <div>
+            <el-skeleton style="width: 100%" :loading="loading" animated :count="3">
+                <template #template>
+                    <div style="padding: 14px">
+                        <el-skeleton-item variant="h3" style="width: 100%" />
+                        <div style="
+                        display: flex;
+                        align-items: center;
+                        justify-items: space-between;
+                        margin-top: 16px;
+                        height: 16px;
+                        ">
+                            <el-skeleton-item variant="text" style="margin-right: 16px" />
+                            <el-skeleton-item variant="text" style="width: 80%" />
                         </div>
-                        <el-row :gutter="20" justify="start">
-                            <el-col :span="24">
-                                <div style="margin-top: 30px;">
-                                    <el-button v-if="item.videoUrl" type="primary" size="small"
-                                        @click="showThemeVideo(item.videoUrl)">视频介绍</el-button>
-                                    <el-button v-if="!item.isFollowed" size="small" type="primary"
-                                        @click="followTheme(index)">关注
-                                    </el-button>
-                                    <el-button v-else size="small" type="primary" @click="followTheme(index)">取消关注
-                                    </el-button>
-                                    <span style="color:gray; font-size: small; margin-left: 5px; margin-bottom: 2px;">{{
-                                        item.follows }}
-                                        人关注</span>
+                    </div>
+                </template>
+                <template #default>
+                    <el-space direction="horizontal" alignment="start" :size="size">
+                        <el-space wrap :size="size">
+                            <el-card v-for="(item, index) in themes" :key="index" class="box-card" style="width: 360px">
+                                <template #header>
+                                    <div class="card-header">
+                                        <el-link :href="item.guid" target="_blank" type="primary">{{ item.title
+                                        }}</el-link>
+                                    </div>
+                                </template>
+                                <div class="text item">
+                                    <div
+                                        style="color: gray; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden;">
+                                        {{ item.content }}</div>
                                 </div>
-                            </el-col>
-                        </el-row>
-                        <!-- <el-row :gutter="20" justify="end">
+                                <el-row :gutter="20" justify="start">
+                                    <el-col :span="24">
+                                        <div style="margin-top: 30px;">
+                                            <el-button v-if="item.videoUrl" type="primary" size="small"
+                                                @click="showThemeVideo(item.videoUrl)">视频介绍</el-button>
+                                            <el-button v-if="!item.isFollowed" size="small" type="primary"
+                                                @click="followTheme(index)">关注
+                                            </el-button>
+                                            <el-button v-else size="small" type="primary" @click="followTheme(index)">取消关注
+                                            </el-button>
+                                            <span
+                                                style="color:gray; font-size: small; margin-left: 5px; margin-bottom: 2px;">{{
+                                                    item.follows }}
+                                                人关注</span>
+                                        </div>
+                                    </el-col>
+                                </el-row>
+                                <!-- <el-row :gutter="20" justify="end">
                             <el-col :span="8">
                                 <div style="width: 100%; height: 75px;">
                                     <el-tooltip class="box-item" effect="dark" content="过去1个月的活动情况" placement="bottom">
@@ -121,31 +162,63 @@
                                 </div>
                             </el-col>
                         </el-row> -->
-                    </el-card>
-                </el-space>
-            </el-space>
+                            </el-card>
+                        </el-space>
+                    </el-space>
+                </template>
+            </el-skeleton>
         </div>
 
         <!-- <el-divider class="margin-top-10" content-position="left">主题动态</el-divider> -->
-        <el-alert style="margin-bottom: 20px; margin-top: 20px;" title="主题动态" type="success" effect="dark" :closable="false"
-            description="下方展示本期课程近期主题动态~" />
-        <div style="padding-left: 40px;">
-            <el-timeline>
-                <el-timeline-item v-for="(activity, index) in themeAactivities" :key="index" :icon="activity.icon"
-                    :type="activity.type" :color="activity.color" :size="activity.size" :hollow="activity.hollow"
-                    :timestamp="activity.timestamp">
-                    <el-avatar size="small" :src="activity.userAvatarUrl" @error="true">
-                        <img src="https://cube.elemecdn.com/e/fd/0fc7d20532fdaf769a25683617711png.png" />
-                    </el-avatar>
-                    <span style="margin-left: 10px;" v-html="activity.content"></span>
-                </el-timeline-item>
-            </el-timeline>
+        <el-alert style="margin-bottom: 20px; margin-top: 20px; background-color: rgb(23, 124, 176) !important;"
+            title="主题动态" type="success" effect="dark" :closable="false" description="下方展示本期课程近期主题动态~" />
+        <div id="home-page-time-line">
+            <el-skeleton style="width: 100%" :loading="loading" animated :count="3">
+                <template #template>
+                    <div style="padding: 14px">
+                        <el-skeleton-item variant="h3" style="width: 100%" />
+                        <div style="
+                        display: flex;
+                        align-items: center;
+                        justify-items: space-between;
+                        margin-top: 16px;
+                        height: 16px;
+                        ">
+                            <el-skeleton-item variant="text" style="margin-right: 16px" />
+                            <el-skeleton-item variant="text" style="width: 80%" />
+                        </div>
+                    </div>
+                </template>
+                <template #default>
+                    <el-timeline>
+                        <el-timeline-item v-for="(activity, index) in themeAactivities" :key="index" :icon="activity.icon"
+                            :type="activity.type" :color="activity.color" :size="activity.size" :hollow="activity.hollow"
+                            :timestamp="activity.timestamp">
+                            <el-avatar size="small" :src="activity.userAvatarUrl" @error="true">
+                                <img src="https://cube.elemecdn.com/e/fd/0fc7d20532fdaf769a25683617711png.png" />
+                            </el-avatar>
+                            <span style="margin-left: 10px;" v-html="activity.content"></span>
+                        </el-timeline-item>
+                    </el-timeline>
+                </template>
+            </el-skeleton>
         </div>
     </el-card>
 
-    <el-dialog v-model="videoDialogVisible" title="主题介绍视频" width="700px" destroy-on-close center>
+    <!-- <el-dialog v-model="videoDialogVisible" title="主题介绍视频" width="700px" destroy-on-close center>
         <div style="width: 100%; height: 400px; text-align: center; vertical-align: middle;">
-            <video :src="currentVideoUrl" controls="controls" autoplay muted></video>
+            <video style="width: 650px;" :src="currentVideoUrl" controls="controls" autoplay muted></video>
+        </div>
+        <template #footer>
+            <span>
+                <el-button size="small" type="primary" @click="videoDialogVisible = false">关闭视频</el-button>
+            </span>
+        </template>
+    </el-dialog> -->
+    <el-dialog v-model="videoDialogVisible" title="主题介绍视频" destroy-on-close center>
+        <div style="width: 100%; text-align: center; vertical-align: middle;">
+            <video style="max-width: 100%; overflow: hidden;" :src="currentVideoUrl"
+                controls="controls" autoplay muted></video>
         </div>
         <template #footer>
             <span>
@@ -179,6 +252,7 @@ export default {
         return {
             baseUrl: 'https://cmooc.bnu.edu.cn/wp-admin/admin-ajax.php?action=',
             userId: -1,
+            loading: true,
             themes: [],
             myThemes: [],
             size: 10,
@@ -211,6 +285,7 @@ export default {
                         this.themes = data.data.themes
                         this.userId = data.data.current_user_id
                         this.themeAactivities = data.data.theme_activities
+                        this.loading = false
                     }
                 }).then(() => {
                     forEach(this.themes, (d) => {
@@ -280,6 +355,12 @@ export default {
 </script>
 
 <style scoped>
+@media (max-width: 768px) {
+    .el-dialog {
+        max-width: 95%
+    }
+}
+
 .margin-top-10 {
     margin-top: 50px;
 }
